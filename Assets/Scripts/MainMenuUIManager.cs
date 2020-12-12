@@ -6,12 +6,12 @@ using UnityEngine.UI;
 
 public class MainMenuUIManager : MonoBehaviour
 {
-    
+
     #region Private Fields
 
     [Tooltip("UIs Game Objects of Main Menu")]
     [SerializeField]
-    private GameObject enterNameUI, chooseGameModeUI,findGameUI,waitingLobbyUI;
+    private GameObject enterNameUI, chooseGameModeUI,findGameUI,waitingLobbyUI,createGameRoomUI;
 
     #endregion
 
@@ -19,15 +19,10 @@ public class MainMenuUIManager : MonoBehaviour
     void Start()
     {
         EventsBroker.OnNameEntered += SetActiveChooseGameModeUI;
-        EventsBroker.OnFindGameEntered += SetActiveFindGameUI;
-        EventsBroker.OnWaitingLobbyEntered += SetActiveWaitingLobbyUI;
-        
     }
     void OnDisable()
     {
          EventsBroker.OnNameEntered -= SetActiveChooseGameModeUI;
-        EventsBroker.OnFindGameEntered -= SetActiveFindGameUI;
-        EventsBroker.OnWaitingLobbyEntered -= SetActiveWaitingLobbyUI;
     }
     #endregion
 
@@ -42,6 +37,7 @@ public class MainMenuUIManager : MonoBehaviour
     public void SetActiveFindGameUI()
     {
         DeactivateAllUIs();
+        
         findGameUI.SetActive(true);
     }
 
@@ -49,6 +45,11 @@ public class MainMenuUIManager : MonoBehaviour
     {
         DeactivateAllUIs();
         waitingLobbyUI.SetActive(true);
+    }
+    public void SetActiveCreateGameRoomUI()
+    {
+        DeactivateAllUIs();
+        createGameRoomUI.SetActive(true);
     }
     
     private void DeactivateAllUIs()

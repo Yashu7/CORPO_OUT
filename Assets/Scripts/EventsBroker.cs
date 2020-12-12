@@ -10,10 +10,6 @@ public class EventsBroker
 
     public static event Action OnNameEntered;
 
-    public static event Action OnFindGameEntered;
-
-    public static event Action OnWaitingLobbyEntered;
-
     #endregion
 
     #region Delegates Calls
@@ -26,23 +22,8 @@ public class EventsBroker
         }
     }
 
-     public static void CallFindGameEntered()
-    {
-        if(OnFindGameEntered != null)
-        {
-            OnFindGameEntered();
-        }
-    }
-
-     public static void CallWaitingLobbyEntered()
-    {
-        if(OnWaitingLobbyEntered != null)
-        {
-            OnWaitingLobbyEntered();
-        }
-    }
 
     #endregion
-    
+
 }
    

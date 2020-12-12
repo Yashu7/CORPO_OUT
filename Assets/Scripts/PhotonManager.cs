@@ -25,22 +25,15 @@ public class PhotonManager : MonoBehaviourPunCallbacks
 
     public void Connect()
     {
-        if(PhotonNetwork.IsConnected)
-        {
-            PhotonNetwork.JoinRandomRoom();
-        }
-        else
-        {
-            PhotonNetwork.ConnectUsingSettings();
             PhotonNetwork.GameVersion = gameVersion;
-        }
+            PhotonNetwork.ConnectUsingSettings();
+            
+           
+        
     }
     public override void OnConnectedToMaster()
     {
-        RoomOptions roomOptions = new RoomOptions();
-        roomOptions.MaxPlayers = 4;
-        PhotonNetwork.JoinOrCreateRoom(roomName,roomOptions,TypedLobby.Default);
-       
+        PhotonNetwork.JoinLobby();
         Debug.Log("PUN Basics Tutorial/Launcher: OnConnectedToMaster() was called by PUN");
     }
 
@@ -50,14 +43,6 @@ public class PhotonManager : MonoBehaviourPunCallbacks
         Debug.LogWarningFormat("PUN Basics Tutorial/Launcher: OnDisconnected() was called by PUN with reason {0}", cause);
     }
 
-    public override void OnCreatedRoom()
-    {
-        Debug.Log("Room Created");
-
-    }
-    public override void OnCreateRoomFailed(short returnCode,string message)
-    {
-        Debug.Log(message);
-    }
+    
 
 }
