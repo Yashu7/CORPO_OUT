@@ -7,8 +7,14 @@ using Photon.Pun;
 [RequireComponent(typeof(InputField))]
 public class EnterPlayerName : MonoBehaviour
 {
+    
+    #region CONSTANT Fields
     //Key for fiding players name in Unity's PlayerPrefs
     const string playerNameKey = "PlayerName";
+
+    #endregion
+
+    #region Monobehaviour Methods
 
     void Start()
     {
@@ -26,8 +32,13 @@ public class EnterPlayerName : MonoBehaviour
         PhotonNetwork.NickName = defaultName;
     }
 
+    #endregion
+
+    #region Public Methods
+
     public void SetPlayerGlobalName(string playerName)
     {
+        playerName = GetComponentInChildren<InputField>().text;
         if(string.IsNullOrEmpty(playerName))
         {
             Debug.LogError("Player's name is empty");
@@ -35,5 +46,8 @@ public class EnterPlayerName : MonoBehaviour
         }
         PhotonNetwork.NickName = playerName;
         PlayerPrefs.SetString(playerNameKey, playerName);
+        EventsBroker.CallNameEntered();
     }
+
+    #endregion
 }
