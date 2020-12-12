@@ -10,8 +10,15 @@ public class GameRoom : MonoBehaviourPunCallbacks
     [SerializeField]
     private Text text;
 
+    public RoomInfo Room {get;private set; }
     public void SetRoomInfo(RoomInfo roomInfo)
     {
-        text.text = roomInfo.Name;
+        Room = roomInfo;
+        text.text = roomInfo.Name + " " + roomInfo.PlayerCount.ToString() + "/" + roomInfo.MaxPlayers.ToString();
+    }
+
+    public void PassGameRoomInfo()
+    {
+        EventsBroker.CallJoinRoom(Room);
     }
 }
