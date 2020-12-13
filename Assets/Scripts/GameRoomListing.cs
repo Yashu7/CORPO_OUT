@@ -10,32 +10,38 @@ public class GameRoomListing : MonoBehaviourPunCallbacks
     public Transform roomListUI;
     public GameRoom roomInstanceUI;
 
-    private List<GameRoom> createdRooms = new List<GameRoom>();
+    public List<GameRoom> createdRooms = new List<GameRoom>();
 
-   
+    
     public override void OnRoomListUpdate(List<RoomInfo> rooms)
     {
         
         foreach (RoomInfo room in rooms)
         {
-            if(room.RemovedFromList)
-            {
+            
                 int index = createdRooms.FindIndex(x => x.Room.Name == room.Name);
-                if(index != 1)
+                if(index != -1)
                 {
                     Destroy(createdRooms[index].gameObject);
                     createdRooms.RemoveAt(index);
                 }
-            }
-            else
-            {
+                
+            
+                Debug.Log("ADDING GAME ROOM");
                 GameRoom gameRoom = new GameRoom();
                 gameRoom = Instantiate(roomInstanceUI,roomListUI);
                 gameRoom.SetRoomInfo(room);
                 createdRooms.Add(gameRoom);
                 
-            }
             
+            
+        }
+    }
+      public override void OnLeftRoom()
+    {
+        foreach(var r in createdRooms)
+        {
+            Destroy(r.gameObject);
         }
     }
     public void RefreshList()

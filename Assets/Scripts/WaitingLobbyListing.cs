@@ -12,6 +12,8 @@ public class WaitingLobbyListing : MonoBehaviourPunCallbacks
 
     public List<GamePlayer> playersList = new List<GamePlayer>();
    
+
+
     public override void OnJoinedRoom()
     {
         foreach(var p in PhotonNetwork.PlayerList)
@@ -27,8 +29,8 @@ public class WaitingLobbyListing : MonoBehaviourPunCallbacks
     {   
             Debug.Log("PLAYER LEAVING " + player.NickName);
             int index = playersList.FindIndex(x => x.Player == player);
-                Destroy(playersList[index].gameObject);
-                playersList.RemoveAt(index);
+            Destroy(playersList[index].gameObject);
+            playersList.RemoveAt(index);
             
     }
 
@@ -40,6 +42,21 @@ public class WaitingLobbyListing : MonoBehaviourPunCallbacks
         gamePlayer.SetPlayerInfo(player);
         playersList.Add(gamePlayer);
             
+    }
+    public void LeaveRoom()
+    {
+        if(playersList != null)
+        {
+        foreach(var a in playersList)
+        {
+            Destroy(a.gameObject);
+            
+        }
+        playersList = new List<GamePlayer>();
+        }
+        PhotonNetwork.LeaveRoom();
+        EventsBroker.CallNameEntered();
+        
     }
 
 }
