@@ -14,11 +14,12 @@ public class GameRoom : MonoBehaviourPunCallbacks
     public void SetRoomInfo(RoomInfo roomInfo)
     {
         Room = roomInfo;
-        text.text = roomInfo.Name + " " + roomInfo.PlayerCount.ToString() + "/" + roomInfo.MaxPlayers.ToString();
+        text.text = roomInfo.Name;
     }
 
     public void PassGameRoomInfo()
     {
         EventsBroker.CallJoinRoom(Room);
     }
+    
 }

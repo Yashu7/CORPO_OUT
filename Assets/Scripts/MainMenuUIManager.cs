@@ -2,6 +2,8 @@
 using System.Collections.Generic;
 using UnityEngine;
 using UnityEngine.UI;
+using Photon.Pun;
+using Photon.Realtime;
 
 
 public class MainMenuUIManager : MonoBehaviour
@@ -19,10 +21,14 @@ public class MainMenuUIManager : MonoBehaviour
     void Start()
     {
         EventsBroker.OnNameEntered += SetActiveChooseGameModeUI;
+        EventsBroker.OnJoinRoom += SetActiveWaitingLobbyUI;
+        EventsBroker.OnRoomCreated += SetActiveWaitingLobbyUI;
     }
     void OnDisable()
     {
          EventsBroker.OnNameEntered -= SetActiveChooseGameModeUI;
+         EventsBroker.OnJoinRoom -= SetActiveWaitingLobbyUI;
+         EventsBroker.OnRoomCreated -= SetActiveWaitingLobbyUI;
     }
     #endregion
 
@@ -41,6 +47,11 @@ public class MainMenuUIManager : MonoBehaviour
         findGameUI.SetActive(true);
     }
 
+    public void SetActiveWaitingLobbyUI(RoomInfo room)
+    {
+        DeactivateAllUIs();
+        waitingLobbyUI.SetActive(true);
+    }
     public void SetActiveWaitingLobbyUI()
     {
         DeactivateAllUIs();

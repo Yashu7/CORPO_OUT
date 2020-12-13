@@ -12,6 +12,7 @@ public class GameRoomListing : MonoBehaviourPunCallbacks
 
     private List<GameRoom> createdRooms = new List<GameRoom>();
 
+   
     public override void OnRoomListUpdate(List<RoomInfo> rooms)
     {
         
@@ -28,11 +29,17 @@ public class GameRoomListing : MonoBehaviourPunCallbacks
             }
             else
             {
-                GameRoom gameRoom = Instantiate(roomInstanceUI,roomListUI);
+                GameRoom gameRoom = new GameRoom();
+                gameRoom = Instantiate(roomInstanceUI,roomListUI);
                 gameRoom.SetRoomInfo(room);
                 createdRooms.Add(gameRoom);
+                
             }
             
         }
+    }
+    public void RefreshList()
+    {
+       
     }
 }

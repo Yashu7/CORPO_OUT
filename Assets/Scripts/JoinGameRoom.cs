@@ -10,6 +10,7 @@ public class JoinGameRoom : MonoBehaviourPunCallbacks
     void Start()
     {
         EventsBroker.OnJoinRoom += JoinRoom;
+        
     }
     public void JoinRoom(RoomInfo room)
     {

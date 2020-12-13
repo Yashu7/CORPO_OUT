@@ -13,6 +13,8 @@ public class EventsBroker
 
     public static event PassObject<RoomInfo> OnJoinRoom;
     public static event Action OnNameEntered;
+    public static event Action OnRoomCreated;
+    
 
     #endregion
 
@@ -30,6 +32,13 @@ public class EventsBroker
         if(OnJoinRoom != null)
         {
             OnJoinRoom(room);
+        }
+    }
+    public static void CallRoomCreated()
+    {
+        if(OnRoomCreated != null)
+        {
+            OnRoomCreated();
         }
     }
 
