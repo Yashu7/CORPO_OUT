@@ -2440,6 +2440,7 @@ MonoBehaviour:
   playersListUI: {fileID: 885563770}
   lobbyInstanceUI: {fileID: 2663569715389926697, guid: 2121f516202d4df4e817ae5aad44dab5,
     type: 3}
+  playersList: []
 --- !u!1 &1148288277
 GameObject:
   m_ObjectHideFlags: 0
